@@ -1,0 +1,52 @@
+import { Fragment } from "react"
+import { useSearchParams } from "react-router-dom"
+
+import { useTodos } from "../../contexts/todo.context"
+
+import './todo-list.styles.css'
+
+const TodoList = () => {
+    const { todos, todoAsCompleted, handleDeleteTodo } = useTodos()
+    const [ searchParams ] = useSearchParams()
+    let navStatus = searchParams.get('todos')
+
+    const handleChange = (id:string) => {
+        todoAsCompleted(id) 
+    }
+
+    let filterTodos = todos;
+
+    if (navStatus==='active') {
+      filterTodos = filterTodos.filter((todo) => !todo.completed)
+    }
+
+    if (navStatus==='completed') {
+      filterTodos = filterTodos.filter((todo) => todo.completed)
+    }
+
+  return (
+    <Fragment>
+      <ul className="main-task">
+        {
+            filterTodos.map((todo) => {
+                const date = new Date(todo.createdAt)
+                return <li key={todo.id}>
+                        <input type="checkbox" id={`task-${todo.id}`} onChange={event=>handleChange(todo.id)} checked={todo.completed} />
+                        <label htmlFor={`task-${todo.id}`}>{todo.task} <span>{todo.completed===true ? '[Completed]':''}</span></label>
+                        <label htmlFor={`task-${todo.id}`}>{date.toDateString()}</label>
+                        {
+                            todo.completed && (
+                                <button type="button" onClick={() => handleDeleteTodo(todo.id)}>Delete</button>
+                            )
+                            
+                        }
+                </li>
+            })
+        }
+
+      </ul>
+    </Fragment>
+  )
+}
+
+export default TodoList
