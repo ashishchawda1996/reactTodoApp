@@ -1,0 +1,28 @@
+form input{
+    border: .1rem solid #ccc;
+    border-radius: .3rem;
+    width: 45rem;
+    margin: 4rem 0;
+    padding: .6rem 1rem;
+    font-size: 1.6rem;
+    letter-spacing: .06rem;
+    font-weight: bold;
+}
+
+form button{
+    padding: .8rem 2.8rem;
+    border: none;
+    border-radius: .3rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 2.4rem;
+     background-color: #68B984;
+     color: #fff;
+}
+
+label{
+    font-size: 1.5rem;
+    letter-spacing: .06rem;
+    color: #3A3845;
+    font-weight: bold;
+}
